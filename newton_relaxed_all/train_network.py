@@ -11,7 +11,7 @@ input_dim = 3
 # TODO 在这里更换网络结构，刚开始将网络结构做简单一点，用一个两层的网络
 n_hidden = [input_dim, 20, 8, 1]
 # TODO 现在网络的命名由网络的结构以及损失函数来决定
-net_dir = "./net/two_layers_entropy"
+net_dir = "./net/two_layers_entropy/"
 data_dir = "./points/"
 
 
@@ -193,10 +193,10 @@ def train_barrier():
     w3 = sess.run(w3)
     b3 = sess.run(b3)
     # TODO 修改层数的时候要改这里
-    w4 = sess.run(w4)
-    b4 = sess.run(b4)
-    w5 = sess.run(w5)
-    b5 = sess.run(b5)
+    # w4 = sess.run(w4)
+    # b4 = sess.run(b4)
+    # w5 = sess.run(w5)
+    # b5 = sess.run(b5)
     sess.close()
 
     # save parameters of the net
@@ -209,10 +209,10 @@ def train_barrier():
     np.savetxt(net_dir + "b2", b2)
     np.savetxt(net_dir + "b3", b3)
     # TODO 修改层数的时候要修改这里
-    np.savetxt(net_dir + "w4", w4)
-    np.savetxt(net_dir + "b4", b4)
-    np.savetxt(net_dir + "w5", w5)
-    np.savetxt(net_dir + "b5", b5)
+    # np.savetxt(net_dir + "w4", w4)
+    # np.savetxt(net_dir + "b4", b4)
+    # np.savetxt(net_dir + "w5", w5)
+    # np.savetxt(net_dir + "b5", b5)
     with open(net_dir + "structure", "w") as f:
         f.write(str(len(n_hidden)) + "\n")
         for i in range(0, len(n_hidden)):
@@ -229,7 +229,7 @@ def abstract_network_barrier():
 # trace和unsafe里面的点是label的，但是关于label的设置有点不太明白
 def get_invariant_data():
     # 加载的是trace和unsafe里面的点
-    train_data = np.loadtxt(data_dir + "invariant1.txt", dtype=np.float32)
+    train_data = np.loadtxt(data_dir + "invariant.txt", dtype=np.float32)
     np.random.shuffle(train_data)
 
     return train_data
@@ -237,7 +237,7 @@ def get_invariant_data():
 
 # 不变式区间里面的点是unlabeled的
 def get_non_invariant_data():
-    train = np.loadtxt(data_dir + "non-invariant1.txt", dtype=np.float32)
+    train = np.loadtxt(data_dir + "non-invariant.txt", dtype=np.float32)
     np.random.shuffle(train)
 
     return train
